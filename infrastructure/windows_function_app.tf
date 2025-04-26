@@ -11,8 +11,8 @@ resource "azurerm_windows_function_app" "products_service" {
   site_config {
     always_on = false
 
-    application_insights_key               = azurerm_application_insights.products_service_fa_002.instrumentation_key
-    application_insights_connection_string = azurerm_application_insights.products_service_fa_002.connection_string
+    application_insights_key               = azurerm_application_insights.products_service_fa_003.instrumentation_key
+    application_insights_connection_string = azurerm_application_insights.products_service_fa_003.connection_string
 
     use_32_bit_worker = true
 
