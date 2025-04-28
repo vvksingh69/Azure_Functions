@@ -1,23 +1,38 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
-import { products } from '../products';
+//import { products } from '../products';
+import { getProductById } from '../shared/repositories/productRepository';
+import { getStockById } from '../shared/repositories/stockRepository';
+import { ProductWithStock } from '../shared/types';
 
 const httpTrigger: AzureFunction = async function (
   context: Context,
   req: HttpRequest
 ): Promise<void> {
-  context.log('HTTP trigger function processed a request.');
   const productId = req.params.productId;
-  const product = products.filter((product) => product.id === productId);
-  const responseMessage = product;
-  context.res = {
-    // status: 200, /* Defaults to 200 */
-    body: responseMessage,
-    headers: {
-      'Access-Control-Allow-Origin': '*', // or specific origin
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  };
+  context.log(
+    'HTTP trigger function processed a request get Product by Id with id',
+    productId
+  );
+  try {
+    const productPromise = getProductById(productId, context);
+    const stockPromise = getStockById(productId, context);
+    const [product, stock] = await Promise.all([productPromise, stockPromise]);
+
+    const productWithStock: ProductWithStock = {
+      ...product,
+      count: stock.count,
+    };
+    console.log('Product with Stock', productWithStock);
+    context.res = {
+      body: productWithStock,
+    };
+  } catch (error) {
+    context.log.error('Error in fetching Product with Id :', error);
+    context.res = {
+      status: 500,
+      body: { message: 'Internal Server Error fetching product' },
+    };
+  }
 };
 
 export default httpTrigger;
