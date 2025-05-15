@@ -1,5 +1,5 @@
 resource "azurerm_windows_function_app" "products_service" {
-  name                        = "fa-products-service-ne-002"
+  name                        = "fa-products-service-ne-vks-001"
   location                    = "northeurope"
   service_plan_id             = azurerm_service_plan.product_service_plan.id
   resource_group_name         = azurerm_resource_group.product_service_rg.name
@@ -11,8 +11,8 @@ resource "azurerm_windows_function_app" "products_service" {
   site_config {
     always_on = false
 
-    application_insights_key               = azurerm_application_insights.products_service_fa_003.instrumentation_key
-    application_insights_connection_string = azurerm_application_insights.products_service_fa_003.connection_string
+    application_insights_key               = azurerm_application_insights.products_service_fa_001.instrumentation_key
+    application_insights_connection_string = azurerm_application_insights.products_service_fa_001.connection_string
 
     use_32_bit_worker = true
 

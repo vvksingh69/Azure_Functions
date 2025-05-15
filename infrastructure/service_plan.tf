@@ -1,5 +1,5 @@
 resource "azurerm_service_plan" "product_service_plan" {
-  name                = "asp-product-service-sand-ne-002"
+  name                = "asp-product-service-sand-ne-001"
   location            = "northeurope"
   os_type             = "Windows"
   sku_name            = "Y1"

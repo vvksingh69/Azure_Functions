@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "products_service_fa" {
-  name                     = "stgsangproductsfanevs003"
+  name                     = "stgsangproductsfanevs001"
   location                 = "northeurope"
   account_replication_type = "LRS"
   account_tier              = "Standard"
