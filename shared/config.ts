@@ -17,6 +17,7 @@ export const getConfig = async (): Promise<AppConfig> => {
   }
 
   const settings = await appConfigClient.listConfigurationSettings({});
+  console.log('Settings', settings);
 
   const configMap: Record<string, string> = {};
 

@@ -1,0 +1,12 @@
+{
+    "bindings": [
+        {
+            "type": "serviceBusTrigger",
+            "direction": "in",
+            "name": "productData",
+            "queueName": "products_service_servicebus_queue",
+            "connection": "ServiceBusConnection"
+        }
+    ],
+     "scriptFile": "../dist/service-bus-import-product/index.js"
+}
